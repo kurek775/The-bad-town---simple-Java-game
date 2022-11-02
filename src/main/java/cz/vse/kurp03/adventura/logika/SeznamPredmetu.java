@@ -1,7 +1,6 @@
 package cz.vse.kurp03.adventura.logika;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  *  Class SeznamPredmetu - eviduje seznam předmětů adventury.
@@ -13,7 +12,7 @@ import java.util.List;
  *@version    pro školní rok 2021/2022
  */
 public class SeznamPredmetu {
-    private List<Predmet>predmet=new ArrayList<>();
+    private Set<Predmet> predmet;
     private HerniPlan plan;
 
     /**
@@ -21,6 +20,7 @@ public class SeznamPredmetu {
      */
     public SeznamPredmetu(HerniPlan plan) {
         this.plan = plan;
+        predmet = new HashSet<>();
     }
 
 
@@ -53,15 +53,10 @@ public class SeznamPredmetu {
     /**
      * Vypíše předměty na dané lokaci a kontroluje zda již nebyly zvednuty
      */
-    public void Vypis( ){
-        for (Predmet pr:predmet) {
-            if (pr.getMistnost().equals(plan.getAktualniProstor().getNazev())){
-                if (pr.getSebrano().equals(false)){
-                    System.out.println(pr.getNazev()+" "+pr.getPopis());
-                }
-            }
-        }
-    }
 
+    public Collection<Predmet> Vypis(){
+        System.out.println(predmet.toString());
+        return Collections.unmodifiableCollection(predmet);
+    }
 
 }

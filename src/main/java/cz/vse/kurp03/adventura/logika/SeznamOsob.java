@@ -1,6 +1,8 @@
 package cz.vse.kurp03.adventura.logika;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,12 +30,11 @@ public class SeznamOsob {
      * Vypisuje postavy podle místa
      *@param  misto  určuje jaké postavy se vypíší
      */
-    public void Vypis(String misto){
-        for (Osoba osoba:osoby) {
-            if (osoba.getMistnost().equals(misto)){
-                System.out.println(osoba.getJmeno()+" "+osoba.getPopis());
-            }
-        }
+    public Collection<Osoba> Vypis(){
+
+
+
+        return Collections.unmodifiableCollection(osoby);
     }
 
     /**
@@ -65,4 +66,7 @@ public class SeznamOsob {
         }
         return null;
     }
+
+
+
 }

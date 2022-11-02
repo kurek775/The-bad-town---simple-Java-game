@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 /**
  * Trida Prostor - popisuje jednotlivé prostory (místnosti) hry
- *
+ * <p>
  * Tato třída je součástí jednoduché textové hry.
- *
+ * <p>
  * "Prostor" reprezentuje jedno místo (místnost, prostor, ..) ve scénáři hry.
  * Prostor může mít sousední prostory připojené přes východy. Pro každý východ
  * si prostor ukládá odkaz na sousedící prostor.
@@ -22,19 +22,22 @@ public class Prostor {
     private Set<Prostor> vychody;   // obsahuje sousední místnosti
     private Boolean zamceno;
 
+
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
      * před domem"
      *
      * @param nazev nazev prostoru, jednoznačný identifikátor, jedno slovo nebo
-     * víceslovný název bez mezer.
+     *              víceslovný název bez mezer.
      * @param popis Popis prostoru.
      */
-    public Prostor(String nazev, String popis,Boolean zamceno) {
+    public Prostor(String nazev, String popis, Boolean zamceno) {
         this.nazev = nazev;
         this.popis = popis;
         vychody = new HashSet<>();
-        this.zamceno=zamceno;
+
+        this.zamceno = zamceno;
+
     }
 
     /**
@@ -45,7 +48,6 @@ public class Prostor {
      * žádné chybové hlášení). Lze zadat též cestu ze do sebe sama.
      *
      * @param vedlejsi prostor, který sousedi s aktualnim prostorem.
-     *
      */
     public void setVychod(Prostor vedlejsi) {
         vychody.add(vedlejsi);
@@ -55,13 +57,13 @@ public class Prostor {
      * Metoda equals pro porovnání dvou prostorů. Překrývá se metoda equals ze
      * třídy Object. Dva prostory jsou shodné, pokud mají stejný název. Tato
      * metoda je důležitá z hlediska správného fungování seznamu východů (Set).
-     *
+     * <p>
      * Bližší popis metody equals je u třídy Object.
      *
      * @param o object, který se má porovnávat s aktuálním
      * @return hodnotu true, pokud má zadaný prostor stejný název, jinak false
-     */  
-      @Override
+     */
+    @Override
     public boolean equals(Object o) {
         // porovnáváme zda se nejedná o dva odkazy na stejnou instanci
         if (this == o) {
@@ -78,7 +80,7 @@ public class Prostor {
         //Vrátí true pro stejné názvy a i v případě, že jsou oba názvy null,
         //jinak vrátí false.
 
-       return (Objects.equals(this.nazev, druhy.nazev));
+        return (Objects.equals(this.nazev, druhy.nazev));
     }
 
     /**
@@ -95,7 +97,7 @@ public class Prostor {
         vysledek = 37 * vysledek + hashNazvu;
         return vysledek;
     }
-      
+
 
     /**
      * Vrací název prostoru (byl zadán při vytváření prostoru jako parametr
@@ -104,7 +106,7 @@ public class Prostor {
      * @return název prostoru
      */
     public String getNazev() {
-        return nazev;       
+        return nazev;
     }
 
     /**
@@ -128,12 +130,27 @@ public class Prostor {
     private String popisVychodu() {
         String vracenyText = "můžete jít: ";
         for (Prostor sousedni : vychody) {
-            vracenyText += sousedni.getNazev() +", "  ;
+            vracenyText += sousedni.getNazev() + ", ";
         }
         return vracenyText;
     }
 
     /**
+     * Vrací kolekci obsahující prostory, se kterými tento prostor sousedí.
+     * Takto získaný seznam sousedních prostor nelze upravovat (přidávat,
+     * odebírat východy) protože z hlediska správného návrhu je to plně
+     * záležitostí třídy Prostor.
+     *
+     * @return Nemodifikovatelná kolekce prostorů (východů), se kterými tento
+     * prostor sousedí.
+     */
+    public Collection<Prostor> getVychody() {
+        return Collections.unmodifiableCollection(vychody);
+    }
+
+
+    /**
+     * /**
      * Vrací prostor, který sousedí s aktuálním prostorem a jehož název je zadán
      * jako parametr. Pokud prostor s udaným jménem nesousedí s aktuálním
      * prostorem, vrací se hodnota null.
@@ -143,33 +160,37 @@ public class Prostor {
      * null, pokud prostor zadaného jména není sousedem.
      */
     public Prostor vratSousedniProstor(String nazevSouseda) {
-        List<Prostor>hledaneProstory = 
-            vychody.stream()
-                   .filter(sousedni -> sousedni.getNazev().equals(nazevSouseda))
-                   .collect(Collectors.toList());
-        if(hledaneProstory.isEmpty()){
+        List<Prostor> hledaneProstory =
+                vychody.stream()
+                        .filter(sousedni -> sousedni.getNazev().equals(nazevSouseda))
+                        .collect(Collectors.toList());
+        if (hledaneProstory.isEmpty()) {
             return null;
-        }
-        else {
+        } else {
             return hledaneProstory.get(0);
         }
     }
-    public Collection<Prostor> getVychody() {
-        return Collections.unmodifiableCollection(vychody);
-    }
+
 
     /**
      * Vrací zda je možné projít místnost
+     *
      * @return ano/ne
      */
     public Boolean getZamceno() {
         return zamceno;
     }
+
     /**
      * Nastavuje novou hodnotu paranetru
-
      */
     public void setZamceno(Boolean zamceno) {
         this.zamceno = zamceno;
     }
+
+    @Override
+    public String toString() {
+        return getNazev();
+    }
+
 }

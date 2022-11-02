@@ -72,4 +72,7 @@ private Boolean utocnost;
     public void setPopis(String popis) {
         this.popis = popis;
     }
+    public String toString() {
+        return getJmeno();
+    }
 }

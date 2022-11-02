@@ -1,5 +1,8 @@
 package cz.vse.kurp03.adventura.logika;
 
+import java.util.Collection;
+import java.util.Collections;
+
 /**
  * Trida Predmet - popisuje jednotlivé předměty
  * Tato třída je součástí jednoduché textové hry.
@@ -13,6 +16,8 @@ public class Predmet {
     private String nazev;
     private String popis;
     private String mistnost;
+
+
     private Boolean lzeZvednout;
     private Boolean sebrano;
 
@@ -39,6 +44,7 @@ public class Predmet {
      * Vrací popis předmětu
      * @return popis předmětu
      */
+
     public String getPopis() {
         return popis;
     }
@@ -69,6 +75,9 @@ public class Predmet {
      * Mění zda-li byl předmět sebrán
      * @param sebrano
      */
+    public String toString() {
+        return getNazev();
+    }
 
     public void setSebrano(Boolean sebrano) {
         this.sebrano = sebrano;

@@ -20,6 +20,7 @@ import javafx.stage.Stage;
  */
 public class Start extends Application
 {
+
     /***************************************************************************
      * Metoda, prostřednictvím níž se spouští celá aplikace.
      *
@@ -27,6 +28,7 @@ public class Start extends Application
      */
     public static void main(String[] args)
     {
+
         if(args.length>0 && args[0].equals("text")) {
             IHra hra = new Hra();
             TextoveRozhrani ui = new TextoveRozhrani(hra);
@@ -45,5 +47,7 @@ public class Start extends Application
         stage.setScene(scene);
         stage.setTitle("Adventura");
         stage.show();
+
     }
+
 }

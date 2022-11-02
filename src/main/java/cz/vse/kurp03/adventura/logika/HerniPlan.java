@@ -24,7 +24,9 @@ public class HerniPlan implements PredmetPozorovani {
     
     private Prostor aktualniProstor;
 
+    private SeznamPredmetu seznamPredmetu;
 
+    private SeznamOsob seznamOsob;
     private Map<String, Prostor> prostory = new HashMap<>();
 
     private Set<Pozorovatel> seznamPozorovatelu = new HashSet<>();
@@ -54,7 +56,16 @@ public class HerniPlan implements PredmetPozorovani {
         Prostor opustenydum = new Prostor("opuštěný_dům","v starém rozbitém domě, kde se děla zvěrstva ",true);
         Prostor hospoda = new Prostor("hospoda","v klasické texaské putice",false);
         Prostor kolonial = new Prostor("koloniál","v obchodě, kde není žádná obsluha možná se tu dá něco najít.",false);
-        
+
+        prostory.put(zbrojnice.getNazev(), zbrojnice);
+        prostory.put(venku.getNazev(), venku);
+        prostory.put(veznice.getNazev(), veznice);
+        prostory.put(kostel.getNazev(), kostel);
+        prostory.put(dumdesperada.getNazev(), dumdesperada);
+        prostory.put(opustenydum.getNazev(), opustenydum);
+        prostory.put(hospoda.getNazev(), hospoda);
+        prostory.put(kolonial.getNazev(), kolonial);
+
         // přiřazují se průchody mezi prostory (sousedící prostory)
         venku.setVychod(veznice);
         venku.setVychod(zbrojnice);
@@ -77,14 +88,7 @@ public class HerniPlan implements PredmetPozorovani {
         opustenydum.setVychod(dumdesperada);
         hospoda.setVychod(venku);
         kolonial.setVychod(venku);
-        prostory.put(zbrojnice.getNazev(), zbrojnice);
-        prostory.put(venku.getNazev(), venku);
-        prostory.put(veznice.getNazev(), veznice);
-        prostory.put(kostel.getNazev(), kostel);
-        prostory.put(dumdesperada.getNazev(), dumdesperada);
-        prostory.put(opustenydum.getNazev(), opustenydum);
-        prostory.put(hospoda.getNazev(), hospoda);
-        prostory.put(kolonial.getNazev(), kolonial);
+
                 
         aktualniProstor = venku;  // hra začíná venku
     }
@@ -110,6 +114,7 @@ public class HerniPlan implements PredmetPozorovani {
      */
     public void setAktualniProstor(Prostor prostor) {
        aktualniProstor = prostor;
+        upozorniPozorovatele();
     }
 
     @Override

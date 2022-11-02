@@ -1,53 +1,69 @@
 package cz.vse.kurp03.adventura.logika;
-/**
- *  Třída PrikazRozhlednout implementuje pro hru příkaz rozhlédnout.
- *  Tato třída je součástí jednoduché textové hry.
- *  Umožní hráči zjistit co a kde se nachází v jeho okolí
- *@author     Kurek Pavel
- *@version    pro školní rok 2021/2022
- */
-public class PrikazRozhlednout implements IPrikaz{
 
-    private static final String NAZEV = "rozhlédnout";
+import java.util.Collection;
+
+/**
+ * Třída PrikazRozhlednout implementuje pro hru příkaz rozhlédnout.
+ * Tato třída je součástí jednoduché textové hry.
+ * Umožní hráči zjistit co a kde se nachází v jeho okolí
+ *
+ * @author Kurek Pavel
+ * @version pro školní rok 2021/2022
+ */
+public class PrikazRozhlednout implements IPrikaz {
+
+    public static final String NAZEV = "rozhlédnout";
+
     private SeznamPredmetu seznamPredmetu;
     private HerniPlan plan;
     private SeznamOsob seznamOsob;
 
 
     /**
-     *  Konstruktor třídy
-     *  @param seznamPredmetu obsahuje předměty hry
-     *  @param plan obsahuje mistnosti hry
-     *  @param seznamOsob obsahuje postavy hry
+     * Konstruktor třídy
+     *
+     * @param seznamPredmetu obsahuje předměty hry
+     * @param plan           obsahuje mistnosti hry
+     * @param seznamOsob     obsahuje postavy hry
      */
     public PrikazRozhlednout(SeznamPredmetu seznamPredmetu, HerniPlan plan, SeznamOsob seznamOsob) {
         this.seznamPredmetu = seznamPredmetu;
         this.plan = plan;
-        this.seznamOsob=seznamOsob;
+        this.seznamOsob = seznamOsob;
     }
 
 
     /**
-     *  Provádí příkaz "rozhlédnout". Určí v jaké místnosti se hráč nachází a podle toho zobrazí předměty a postavy
-     *@return zpráva, kterou vypíše hra hráči
+     * Provádí příkaz "rozhlédnout". Určí v jaké místnosti se hráč nachází a podle toho zobrazí předměty a postavy
+     *
+     * @return zpráva, kterou vypíše hra hráči
      */
     @Override
     public String provedPrikaz(String... parametry) {
-System.out.println("Předměty : ");
-           seznamPredmetu.Vypis();
-        System.out.println("Osoby  : ");
-            seznamOsob.Vypis(plan.getAktualniProstor().getNazev());
+        String seznam = seznamOsob.Vypis().toString() + seznamPredmetu.Vypis().toString();
+        Collection<Osoba> osoby = seznamOsob.Vypis();
 
-            return "----------------------------------------------";
+
+        for (Osoba os : osoby) {
+            System.out.println(os);
+        }
+        return seznam;
 
     }
 
     /**
-     *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
-     *  @ return nazev prikazu
+     * Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
+     *
+     * @ return nazev prikazu
      */
     @Override
     public String getNazev() {
         return NAZEV;
     }
+
+    public String toString() {
+        return getNazev();
+    }
+
+
 }
