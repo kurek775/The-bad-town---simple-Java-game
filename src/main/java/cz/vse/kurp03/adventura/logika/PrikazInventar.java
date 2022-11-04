@@ -25,8 +25,9 @@ public class PrikazInventar implements IPrikaz{
      */
     @Override
     public String provedPrikaz(String... parametry) {
-        inventar.vypis();
-        return "------------------------------------";
+
+        return inventar.vypis().toString();
+
     }
     /**
      *  Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)

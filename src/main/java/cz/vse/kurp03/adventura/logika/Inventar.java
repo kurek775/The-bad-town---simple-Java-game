@@ -31,10 +31,8 @@ public class Inventar {
     /**
      * vypisuje inventář
      */
-    public void vypis(){
-        for (String s:list) {
-            System.out.println(s);
-        }
+    public List<String> vypis(){
+     return list;
     }
     /**
      * vyhledává v inventáři na základě popisu

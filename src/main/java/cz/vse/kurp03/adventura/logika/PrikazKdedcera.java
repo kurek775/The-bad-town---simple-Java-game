@@ -12,6 +12,7 @@ public class PrikazKdedcera implements IPrikaz{
     private static final String NAZEV = "kde_dcera";
     private HerniPlan plan;
     private SeznamOsob seznamOsob;
+
     private Hra hra;
     private Inventar inventar;
 

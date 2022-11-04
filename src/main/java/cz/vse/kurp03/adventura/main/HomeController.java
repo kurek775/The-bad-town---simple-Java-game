@@ -94,7 +94,7 @@ public class HomeController implements Pozorovatel {
                     add.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            String pr ="zvedni" + " " + predmet.getNazev();
+                            String pr = "zvedni" + " " + predmet.getNazev();
                             zpracujPrikaz(pr);
                             aktualizuj(hra.getHerniPlan());
                         }
@@ -119,11 +119,30 @@ public class HomeController implements Pozorovatel {
                 super.updateItem(osoba, empty);
                 if (!empty) {
 
-                    Button add = new Button("+");
-                    add.setOnAction(new EventHandler<ActionEvent>() {
+                    Button duel = new Button("duel");
+                    duel.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            String pr ="zaútoč" + " " + osoba.getJmeno();
+                            String pr = "zaútoč" + " " + osoba.getJmeno();
+                            zpracujPrikaz(pr);
+                            aktualizuj(hra.getHerniPlan());
+                        }
+                    });
+
+                    Button interakce = new Button("T");
+                    interakce.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            String pr = "interakce" + " " + osoba.getJmeno();
+                            zpracujPrikaz(pr);
+                            aktualizuj(hra.getHerniPlan());
+                        }
+                    });
+                    Button kdeDcera = new Button("kde");
+                    kdeDcera.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            String pr = "kde_dcera" + " " + osoba.getJmeno();
                             zpracujPrikaz(pr);
                             aktualizuj(hra.getHerniPlan());
                         }
@@ -134,7 +153,7 @@ public class HomeController implements Pozorovatel {
 
 
                     setText(osoba.getJmeno());
-                    setGraphic(new HBox(add, iw));
+                    setGraphic(new HBox(duel, interakce, kdeDcera, iw));
                 } else {
                     setText(null);
                     setGraphic(null);
@@ -178,6 +197,8 @@ public class HomeController implements Pozorovatel {
             vstup.setDisable(true);
             proved.setDisable(true);
             panelVychodu.setDisable(true);
+            panelPredmetu.setDisable(true);
+            panelOsob.setDisable(true);
         }
         vstup.requestFocus();
     }
@@ -195,6 +216,7 @@ public class HomeController implements Pozorovatel {
         Collection<Predmet> predmety = hra.getSeznamPredmetu();
         panelPredmetu.getItems().addAll(predmety);
     }
+
     private void naplnPanelOsob() {
 
         panelOsob.getItems().clear();
