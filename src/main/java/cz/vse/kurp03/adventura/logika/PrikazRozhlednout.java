@@ -41,12 +41,7 @@ public class PrikazRozhlednout implements IPrikaz {
     @Override
     public String provedPrikaz(String... parametry) {
         String seznam = seznamOsob.Vypis().toString() + seznamPredmetu.Vypis().toString();
-        Collection<Osoba> osoby = seznamOsob.Vypis();
 
-
-        for (Osoba os : osoby) {
-            System.out.println(os);
-        }
         return seznam;
 
     }

@@ -39,23 +39,33 @@ public class SeznamPredmetu {
      *@param  nazev  parametr, podle kterého metoda hledá předmět
      * @return zda-li lze předmět zvednout
      */
-    public Boolean najdiPredmet(String nazev){
+    public Predmet najdiPredmet(String nazev){
 
         for (Predmet pr:predmet) {
-            if (pr.getNazev().equals(nazev)&&pr.getMistnost().equals(plan.getAktualniProstor().getNazev())&&pr.getLzeZvednout().equals(true)&&pr.getSebrano()==false){
-                pr.setSebrano(true);
-                return true;
+            if (pr.getNazev().equals(nazev)&&pr.getMistnost().equals(plan.getAktualniProstor().getNazev())){
+
+                return pr;
             }
         }
-        return false;
+        return null;
     }
+    public void dropItem(String nazev){
 
+        for (Predmet pr:predmet) {
+            if (pr.getNazev().equals(nazev)){
+                pr.setSebrano(false);
+                pr.setMistnost(plan.getAktualniProstor().getNazev());
+
+            }
+        }
+
+    }
     /**
      * Vypíše předměty na dané lokaci a kontroluje zda již nebyly zvednuty
      */
 
     public Collection<Predmet> Vypis(){
-        System.out.println(predmet.toString());
+
         return Collections.unmodifiableCollection(predmet);
     }
 

@@ -43,11 +43,12 @@ public class PrikazZvedni implements IPrikaz{
         if (inventar.obsah()>=5){
             return "Máš plný batoh, kapsy prostě všechno";
         }
-        if (seznamPredmetu.najdiPredmet(parametry[0])==true){
+        if (seznamPredmetu.najdiPredmet(parametry[0])!=null && seznamPredmetu.najdiPredmet(parametry[0]).getLzeZvednout().equals(true)){
             inventar.vloz(parametry[0]);
+            seznamPredmetu.najdiPredmet(parametry[0]).setSebrano(true);
             return "Predmet vlozen do inventare";
         }else{
-            return "Takový předmět tu není nebo ho neuzvedneš";
+            return "Takový předmět má někdo u sebe nebo ho neuzvedneš nebo tu prostě není";
         }
 
 

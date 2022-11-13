@@ -54,13 +54,13 @@ public class HraTest {
      */
     @Test
     public void testPrubehHry() {
-        assertEquals("domeček", hra1.getHerniPlan().getAktualniProstor().getNazev());
-        hra1.zpracujPrikaz("jdi les");
-        assertEquals(false, hra1.isKonecHry());
-        assertEquals("les", hra1.getHerniPlan().getAktualniProstor().getNazev());
-        hra1.zpracujPrikaz("jdi hluboký_les");
-        assertEquals(false, hra1.isKonecHry());
-        assertEquals("hluboký_les", hra1.getHerniPlan().getAktualniProstor().getNazev());
+        assertEquals("venku", hra1.getHerniPlan().getAktualniProstor().getNazev());
+        hra1.zpracujPrikaz("jdi koloniál");
+        assertEquals(false, hra1.konecHry());
+        assertEquals("koloniál", hra1.getHerniPlan().getAktualniProstor().getNazev());
+
+        assertEquals(false, hra1.konecHry());
+        assertEquals("koloniál", hra1.getHerniPlan().getAktualniProstor().getNazev());
 
         // následuje ukázka testování věcí - zatím nejsou ani hlavičky metod
         
@@ -73,6 +73,6 @@ public class HraTest {
 
         // příkaz konec
         hra1.zpracujPrikaz("konec");
-        assertEquals(true, hra1.isKonecHry());
+        assertEquals(true, hra1.konecHry());
     }
 }

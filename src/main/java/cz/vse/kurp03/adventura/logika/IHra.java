@@ -3,6 +3,7 @@
 package cz.vse.kurp03.adventura.logika;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  *  Rozhraní které musí implementovat hra, je na ně navázáno uživatelské rozhraní
@@ -47,6 +48,7 @@ public interface IHra
 
     public Collection<Predmet> getSeznamPredmetu();
     public Collection<Osoba> getSeznamOsob();
+    public List<String> getInventar();
     /**
      *  Metoda vrátí odkaz na herní plán, je využita hlavně v testech,
      *  kde se jejím prostřednictvím získává aktualní místnost hry.

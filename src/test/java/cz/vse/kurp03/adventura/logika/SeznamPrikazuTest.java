@@ -18,12 +18,19 @@ public class SeznamPrikazuTest
     private Hra hra;
     private PrikazKonec prKonec;
     private PrikazJdi prJdi;
-    
+    private Inventar inventar;
+
+    private SeznamOsob seznamOsob;
+
     @BeforeEach
     public void setUp() {
         hra = new Hra();
+
+        inventar = new Inventar();
+        seznamOsob = new SeznamOsob();
+
         prKonec = new PrikazKonec(hra);
-        prJdi = new PrikazJdi(hra.getHerniPlan());
+        prJdi = new PrikazJdi(hra.getHerniPlan(), inventar, seznamOsob,hra);
     }
 
     @Test

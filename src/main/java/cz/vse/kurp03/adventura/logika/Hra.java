@@ -3,6 +3,8 @@ package cz.vse.kurp03.adventura.logika;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Třída Hra - třída představující logiku adventury.
@@ -37,7 +39,7 @@ public class Hra implements IHra {
 
         platnePrikazy.vlozPrikaz(new PrikazNapoveda(platnePrikazy));
         platnePrikazy.vlozPrikaz(new PrikazJdi(herniPlan, inventar, seznamOsob, this));
-        platnePrikazy.vlozPrikaz(new PrikazKdedcera(herniPlan, seznamOsob, this, inventar));
+        platnePrikazy.vlozPrikaz(new PrikazKdedcera(herniPlan, seznamOsob, this, inventar, seznamPredmetu));
         platnePrikazy.vlozPrikaz(new PrikazZvedni(inventar, seznamPredmetu));
         platnePrikazy.vlozPrikaz(new PrikazZahod(inventar, seznamPredmetu));
         platnePrikazy.vlozPrikaz(new PrikazInventar(inventar));
@@ -55,7 +57,7 @@ public class Hra implements IHra {
         seznamPredmetu.vlozPredmet(new Predmet("páčidlo", "- vhodné pro otvírání všeho možného", "koloniál", true, false));
 
         seznamPredmetu.vlozPredmet(new Predmet("skříň", "- pěkná skřín", "koloniál", false, false));
-        seznamPredmetu.vlozPredmet(new Predmet("skříň druhá", "- ošklivá skřín", "koloniál", false, false));
+        seznamPredmetu.vlozPredmet(new Predmet("postel", "- ošklivá postel", "koloniál", false, false));
         seznamPredmetu.vlozPredmet(new Predmet("truhla", "- prázdná truhla", "hospoda", false, false));
         seznamPredmetu.vlozPredmet(new Predmet("odpadky", "- staré oblečení", "venku", true, false));
         seznamPredmetu.vlozPredmet(new Predmet("sud", "- prázdný sud", "venku", false, false));
@@ -91,18 +93,21 @@ public class Hra implements IHra {
     }
 
     public Collection<Predmet> getSeznamPredmetu() {
-        Collection<Predmet> sorted_predmety = new ArrayList<>();
+        Collection<Predmet> sorted_predmety = new HashSet<>();
         for (Predmet pr : seznamPredmetu.Vypis()) {
-            if (pr.getMistnost().equals(herniPlan.getAktualniProstor().getNazev()) && pr.getSebrano().equals(false)) {
+            if (pr.getMistnost().equals(herniPlan.getAktualniProstor().getNazev()) && pr.getSebrano().equals(false) ) {
                 sorted_predmety.add(pr);
             }
 
         }
         return sorted_predmety;
     }
+    public List<String> getInventar() {
 
+        return inventar.vypis();
+    }
     public Collection<Osoba> getSeznamOsob() {
-        Collection<Osoba> sorted_osoby = new ArrayList<>();
+        Collection<Osoba> sorted_osoby = new HashSet<>();
         for (Osoba pr : seznamOsob.Vypis()) {
             if (pr.getMistnost().equals(herniPlan.getAktualniProstor().getNazev()) && !pr.getPopis().equals("- mrtvý")) {
                 sorted_osoby.add(pr);

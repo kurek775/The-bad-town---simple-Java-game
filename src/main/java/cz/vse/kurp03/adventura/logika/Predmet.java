@@ -82,4 +82,11 @@ public class Predmet {
     public void setSebrano(Boolean sebrano) {
         this.sebrano = sebrano;
     }
+    public void setMistnost(String mistnost) {
+        this.mistnost = mistnost;
+    }
+
+    public void setLzeZvednout(Boolean lzezvednout) {
+        this.lzeZvednout = lzezvednout;
+    }
 }
