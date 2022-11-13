@@ -1,6 +1,3 @@
-Kurek Pavel
-
-
 Juan hledá ve městě Bad town dceru náčelníka kmene apačů, který mu za ní slíbil mapu k pokladu.
 Příkazy: jdi, seber, inventář, kde_dcera, zvedni, zahod, zaútoč, rozhlédnout, interakce
 
